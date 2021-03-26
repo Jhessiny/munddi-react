@@ -1,0 +1,16 @@
+.map-wrapper {
+  height: 550px;
+  width: 55%;
+  background-color: #eee;
+  position: relative;
+  .map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    .popup-store__image {
+      width: 100%;
+    }
+  }
+}
