@@ -34,3 +34,21 @@ html {
     cursor: pointer;
   }
 }
+
+@media (max-width: 900px) {
+  html body {
+    .map-and-stores-wrapper {
+      width: 750px;
+    }
+  }
+}
+@media (max-width: 750px) {
+  html {
+    body {
+      .map-and-stores-wrapper {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
