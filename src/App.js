@@ -83,6 +83,7 @@ function App() {
             hasMapBeenCreated={hasMapBeenCreated}
             message={message}
             setCurrentStore={setCurrentStore}
+            setCenter={setCenter}
           />
           <Map
             stores={stores}

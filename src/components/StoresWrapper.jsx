@@ -7,6 +7,7 @@ const StoresWrapper = ({
   hasMapBeenCreated,
   message,
   setCurrentStore,
+  setCenter,
 }) => {
   return (
     <div className="stores-wrapper">
@@ -19,6 +20,7 @@ const StoresWrapper = ({
               store={store}
               key={"store-" + index}
               setCurrentStore={setCurrentStore}
+              setCenter={setCenter}
             />
           ))
         : null}
