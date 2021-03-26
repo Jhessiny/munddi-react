@@ -65,9 +65,16 @@ function App() {
     }
   }, [map]);
 
+  const setCenter = (coords) => {
+    map.setView(coords, 12);
+  };
+
   return (
     <div className="App">
       <Header />
+      <button onClick={() => setCenter(userPosition)} className={"locate-user"}>
+        Onde estou?
+      </button>
       {!!userPosition.length && (
         <div className="map-and-stores-wrapper">
           <StoresWrapper
