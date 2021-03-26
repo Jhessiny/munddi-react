@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.scss";
 import Header from "./components/Header";
 import Map from "./components/Map";
+import StoresWrapper from "./components/StoresWrapper";
 
 function App() {
   const [userPosition, setUserPosition] = useState([]);
@@ -10,6 +11,7 @@ function App() {
   const [stores, setStores] = useState([]);
   const [map, setMap] = useState(null);
   const [message, setMessage] = useState("");
+  const [hasMapBeenCreated, setHasMapBeenCreated] = useState(false);
   const fetchStores = async (ne_lat, ne_lng, sw_lat, sw_lng) => {
     const url = `https://munddi.com/dev/pdvs?ne_lat=${ne_lat}&ne_lng=${ne_lng}&sw_lat=${sw_lat}&sw_lng=${sw_lng}`;
 
@@ -66,12 +68,21 @@ function App() {
     <div className="App">
       <Header />
       {!!userPosition.length && (
-        <Map
-          stores={stores}
-          userPosition={userPosition}
-          isFetching={isFetching}
-          setMap={setMap}
-        />
+        <div className="map-and-stores-wrapper">
+          <StoresWrapper
+            stores={stores}
+            isFetching={isFetching}
+            hasMapBeenCreated={hasMapBeenCreated}
+            message={message}
+          />
+          <Map
+            stores={stores}
+            userPosition={userPosition}
+            isFetching={isFetching}
+            setMap={setMap}
+            setHasMapBeenCreated={setHasMapBeenCreated}
+          />
+        </div>
       )}
     </div>
   );

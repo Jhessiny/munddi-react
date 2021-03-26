@@ -1,0 +1,23 @@
+.stores-wrapper {
+  overflow-y: scroll;
+  width: 45%;
+  border: 1px solid #ddd;
+  .store-item {
+    box-shadow: 0px 3px 3px #ddd;
+    padding: 20px;
+    min-height: 90px;
+    color: #444;
+    &:hover {
+      background-color: #eee;
+      cursor: pointer;
+    }
+    h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+  }
+  .stores-message {
+    padding: 20px 15px;
+    font-size: 14px;
+  }
+}

@@ -11,5 +11,15 @@ html {
   body {
     background-color: #eee;
     font-size: 1.6rem;
+
+    .map-and-stores-wrapper {
+      background-color: #fff;
+      height: 75vh;
+      max-height: 600px;
+      display: flex;
+      width: 900px;
+      margin: 10px auto 0 auto;
+      box-shadow: 3px 3px 3px #ddd;
+    }
   }
 }
