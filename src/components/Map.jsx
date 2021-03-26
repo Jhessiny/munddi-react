@@ -1,6 +1,7 @@
 import { Icon } from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./Map.scss";
+import Spinner from "./UI/Spinner";
 
 const Map = ({
   stores,
@@ -37,7 +38,7 @@ const Map = ({
   return (
     <div className="map-wrapper">
       {isFetching ? (
-        <div class="loader">Loading...</div>
+        <Spinner />
       ) : (
         <MapContainer
           center={userPosition}
