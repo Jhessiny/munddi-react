@@ -93,6 +93,7 @@ function App() {
           setHasMapBeenCreated={setHasMapBeenCreated}
           currentStore={currentStore}
           hasMapBeenCreated={hasMapBeenCreated}
+          message={message}
         />
       </div>
     </div>

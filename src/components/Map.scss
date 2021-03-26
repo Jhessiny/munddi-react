@@ -12,6 +12,9 @@
       width: 100%;
     }
   }
+  .stores-message {
+    display: none;
+  }
 }
 
 @media (max-width: 900px) {
@@ -23,5 +26,12 @@
 @media (max-width: 750px) {
   .map-wrapper {
     width: 100%;
+    .map {
+      position: relative;
+      margin-top: 1rem;
+    }
+    .stores-message {
+      padding: 1rem;
+    }
   }
 }
