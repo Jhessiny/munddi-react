@@ -9,6 +9,7 @@ const Map = ({
   isFetching,
   setMap,
   setHasMapBeenCreated,
+  hasMapBeenCreated,
   currentStore,
 }) => {
   const blueIcon = new Icon({
@@ -37,50 +38,52 @@ const Map = ({
 
   return (
     <div className="map-wrapper">
-      {isFetching ? (
+      {isFetching && !hasMapBeenCreated ? (
         <Spinner />
       ) : (
-        <MapContainer
-          center={userPosition}
-          zoom={12}
-          scrollWheelZoom={true}
-          className="map"
-          whenCreated={(map) => {
-            setMap(map);
-            setHasMapBeenCreated(true);
-          }}
-        >
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Marker position={userPosition} icon={userIcon}>
-            <Popup>
-              <p>Você está aqui</p>
-            </Popup>
-          </Marker>
+        !!userPosition.length && (
+          <MapContainer
+            center={userPosition}
+            zoom={12}
+            scrollWheelZoom={true}
+            className="map"
+            whenCreated={(map) => {
+              setMap(map);
+              setHasMapBeenCreated(true);
+            }}
+          >
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={userPosition} icon={userIcon}>
+              <Popup>
+                <p>Você está aqui</p>
+              </Popup>
+            </Marker>
 
-          {stores.length &&
-            stores.map((store, index) => (
-              <Marker
-                position={[store.lat, store.lng]}
-                icon={currentStore === store.name ? redIcon : blueIcon}
-                key={index}
-              >
-                <Popup>
-                  <img
-                    src={store.image_url}
-                    alt=""
-                    className="popup-store__image"
-                  />
-                  <h2>{store.name}</h2>
-                  <p>
-                    {store.street} - {store.city}/{store.uf}
-                  </p>
-                </Popup>
-              </Marker>
-            ))}
-        </MapContainer>
+            {stores.length &&
+              stores.map((store, index) => (
+                <Marker
+                  position={[store.lat, store.lng]}
+                  icon={currentStore === store.name ? redIcon : blueIcon}
+                  key={index}
+                >
+                  <Popup>
+                    <img
+                      src={store.image_url}
+                      alt=""
+                      className="popup-store__image"
+                    />
+                    <h2>{store.name}</h2>
+                    <p>
+                      {store.street} - {store.city}/{store.uf}
+                    </p>
+                  </Popup>
+                </Marker>
+              ))}
+          </MapContainer>
+        )
       )}
     </div>
   );

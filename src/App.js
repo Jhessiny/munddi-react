@@ -85,16 +85,15 @@ function App() {
           setCurrentStore={setCurrentStore}
           setCenter={setCenter}
         />
-        {!!userPosition.length && (
-          <Map
-            stores={stores}
-            userPosition={userPosition}
-            isFetching={isFetching}
-            setMap={setMap}
-            setHasMapBeenCreated={setHasMapBeenCreated}
-            currentStore={currentStore}
-          />
-        )}
+        <Map
+          stores={stores}
+          userPosition={userPosition}
+          isFetching={isFetching}
+          setMap={setMap}
+          setHasMapBeenCreated={setHasMapBeenCreated}
+          currentStore={currentStore}
+          hasMapBeenCreated={hasMapBeenCreated}
+        />
       </div>
     </div>
   );
