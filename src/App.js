@@ -75,16 +75,17 @@ function App() {
       <button onClick={() => setCenter(userPosition)} className={"locate-user"}>
         Onde estou?
       </button>
-      {!!userPosition.length && (
-        <div className="map-and-stores-wrapper">
-          <StoresWrapper
-            stores={stores}
-            isFetching={isFetching}
-            hasMapBeenCreated={hasMapBeenCreated}
-            message={message}
-            setCurrentStore={setCurrentStore}
-            setCenter={setCenter}
-          />
+
+      <div className="map-and-stores-wrapper">
+        <StoresWrapper
+          stores={stores}
+          isFetching={isFetching}
+          hasMapBeenCreated={hasMapBeenCreated}
+          message={message}
+          setCurrentStore={setCurrentStore}
+          setCenter={setCenter}
+        />
+        {!!userPosition.length && (
           <Map
             stores={stores}
             userPosition={userPosition}
@@ -93,8 +94,8 @@ function App() {
             setHasMapBeenCreated={setHasMapBeenCreated}
             currentStore={currentStore}
           />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
