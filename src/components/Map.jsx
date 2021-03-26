@@ -27,7 +27,6 @@ const Map = ({
     iconAnchor: [12.5, 21],
     popupAnchor: [0, -41],
   });
-
   const userIcon = new Icon({
     iconUrl: "img/person.png",
     iconSize: [50, 50],
@@ -35,61 +34,63 @@ const Map = ({
     popupAnchor: [0, -41],
   });
 
-  console.log(stores);
+  if (hasMapBeenCreated) {
+    console.log(isFetching, hasMapBeenCreated);
+  }
 
+  let mapComponent = (
+    <MapContainer
+      center={userPosition}
+      zoom={12}
+      scrollWheelZoom={true}
+      className={`map ${isFetching && !hasMapBeenCreated && "invisible-map"}`}
+      whenCreated={(map) => {
+        setMap(map);
+        setHasMapBeenCreated(true);
+      }}
+    >
+      <TileLayer
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Marker position={userPosition} icon={userIcon}>
+        <Popup>
+          <p>Você está aqui</p>
+        </Popup>
+      </Marker>
+
+      {stores.length &&
+        stores.map((store, index) => (
+          <Marker
+            position={[store.lat, store.lng]}
+            icon={currentStore === store.name ? redIcon : blueIcon}
+            key={index}
+          >
+            <Popup>
+              <img
+                src={store.image_url}
+                alt=""
+                className="popup-store__image"
+              />
+              <h2>{store.name}</h2>
+              <p>
+                {store.street} - {store.city}/{store.uf}
+              </p>
+            </Popup>
+          </Marker>
+        ))}
+    </MapContainer>
+  );
   return (
     <div className="map-wrapper">
-      {isFetching && !hasMapBeenCreated ? (
-        <Spinner />
-      ) : (
-        !!userPosition.length && (
-          <>
-            <p className="stores-message">
-              {!isFetching && hasMapBeenCreated ? message : ""}
-            </p>
-            <MapContainer
-              center={userPosition}
-              zoom={12}
-              scrollWheelZoom={true}
-              className="map"
-              whenCreated={(map) => {
-                setMap(map);
-                setHasMapBeenCreated(true);
-              }}
-            >
-              <TileLayer
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <Marker position={userPosition} icon={userIcon}>
-                <Popup>
-                  <p>Você está aqui</p>
-                </Popup>
-              </Marker>
-
-              {stores.length &&
-                stores.map((store, index) => (
-                  <Marker
-                    position={[store.lat, store.lng]}
-                    icon={currentStore === store.name ? redIcon : blueIcon}
-                    key={index}
-                  >
-                    <Popup>
-                      <img
-                        src={store.image_url}
-                        alt=""
-                        className="popup-store__image"
-                      />
-                      <h2>{store.name}</h2>
-                      <p>
-                        {store.street} - {store.city}/{store.uf}
-                      </p>
-                    </Popup>
-                  </Marker>
-                ))}
-            </MapContainer>
-          </>
-        )
+      {isFetching || !hasMapBeenCreated ? <Spinner /> : null}
+      {!!userPosition.length && (
+        <>
+          <p className="stores-message">
+            {!isFetching && hasMapBeenCreated ? message : ""}
+          </p>
+          {mapComponent}
+        </>
       )}
     </div>
   );
