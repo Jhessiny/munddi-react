@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.scss";
-import Header from "./components/Header";
+import Header from "./components/Layout/Header";
 import Map from "./components/Map";
 import StoresWrapper from "./components/StoresWrapper";
 
