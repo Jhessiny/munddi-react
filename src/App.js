@@ -8,6 +8,7 @@ function App() {
   const [userPosition, setUserPosition] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [stores, setStores] = useState([]);
+  const [map, setMap] = useState(null);
   const [message, setMessage] = useState("");
   const fetchStores = async (ne_lat, ne_lng, sw_lat, sw_lng) => {
     const url = `https://munddi.com/dev/pdvs?ne_lat=${ne_lat}&ne_lng=${ne_lng}&sw_lat=${sw_lat}&sw_lng=${sw_lng}`;
@@ -42,6 +43,25 @@ function App() {
     }
   }, []);
 
+  const getBoundsCoords = () => {
+    let northEast = map.getBounds()._northEast;
+    let southWest = map.getBounds()._southWest;
+    let ne_lat = northEast.lat;
+    let ne_lng = northEast.lng;
+    let sw_lat = southWest.lat;
+    let sw_lng = southWest.lng;
+    fetchStores(ne_lat, ne_lng, sw_lat, sw_lng);
+  };
+
+  useEffect(() => {
+    if (map) {
+      getBoundsCoords();
+      map.on("moveend", function () {
+        getBoundsCoords();
+      });
+    }
+  }, [map]);
+
   return (
     <div className="App">
       <Header />
@@ -50,6 +70,7 @@ function App() {
           stores={stores}
           userPosition={userPosition}
           isFetching={isFetching}
+          setMap={setMap}
         />
       )}
     </div>
