@@ -1,7 +1,13 @@
 import "./StoresWrapper.scss";
 import Store from "./Store";
 
-const StoresWrapper = ({ stores, isFetching, hasMapBeenCreated, message }) => {
+const StoresWrapper = ({
+  stores,
+  isFetching,
+  hasMapBeenCreated,
+  message,
+  setCurrentStore,
+}) => {
   return (
     <div className="stores-wrapper">
       <p className="stores-message">
@@ -9,7 +15,11 @@ const StoresWrapper = ({ stores, isFetching, hasMapBeenCreated, message }) => {
       </p>
       {stores.length
         ? stores.map((store, index) => (
-            <Store store={store} key={"store-" + index} />
+            <Store
+              store={store}
+              key={"store-" + index}
+              setCurrentStore={setCurrentStore}
+            />
           ))
         : null}
     </div>

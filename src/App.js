@@ -12,6 +12,7 @@ function App() {
   const [map, setMap] = useState(null);
   const [message, setMessage] = useState("");
   const [hasMapBeenCreated, setHasMapBeenCreated] = useState(false);
+  const [currentStore, setCurrentStore] = useState(null);
   const fetchStores = async (ne_lat, ne_lng, sw_lat, sw_lng) => {
     const url = `https://munddi.com/dev/pdvs?ne_lat=${ne_lat}&ne_lng=${ne_lng}&sw_lat=${sw_lat}&sw_lng=${sw_lng}`;
 
@@ -74,6 +75,7 @@ function App() {
             isFetching={isFetching}
             hasMapBeenCreated={hasMapBeenCreated}
             message={message}
+            setCurrentStore={setCurrentStore}
           />
           <Map
             stores={stores}
@@ -81,6 +83,7 @@ function App() {
             isFetching={isFetching}
             setMap={setMap}
             setHasMapBeenCreated={setHasMapBeenCreated}
+            currentStore={currentStore}
           />
         </div>
       )}
